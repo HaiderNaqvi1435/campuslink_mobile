@@ -1,0 +1,121 @@
+
+CourseDataModel
+{
+    "course_code":"CSI-602" ,
+    "course_code": "Distributed Database System",
+    "credit_hours": "3(2-1)",
+    "department_id": "department_id",
+}
+
+NotificationsModel
+{
+  
+      'id': "id",
+      'title': "title",
+      'body': "body",
+      'audience': "audience",
+      'department_id': "department_id",
+      'date_time': "date_time",
+   
+}
+
+complaintModel
+{
+      'id': "id",
+      'title': "title",
+      'body': "body",
+      'date_time': "date_time",
+    'complainant_id': 'complainant_id',
+}
+
+timetableModel
+{
+  "starttime": "starttime",
+  "endtime": "endtime",
+  "course_code": "course_code",
+  "teacher_id": "teacher_id",
+  "batch_id": "batch_id",
+  "day_of_week": "day_of_week",
+  "room_id": 1,
+}
+
+batchmodel
+{
+  "batch_id": "batch_id",
+  "session": "session",
+  "semester": "semester",
+  "program": "program",
+  "department_id": "department_id",
+}
+
+departmentmodel
+{
+  "department_id": "department_id",
+  "department_name": "department_name",
+}
+
+teacherModel
+{
+  "teacher_id": "teacher_id",
+  "email": "email",
+  "teacher_name": " teacher_name",
+  "father_name": "father_name",
+  "teacher_cnic": "teacher_cnic",
+  "phone": "phone",
+  "department_id": "department_id",
+  "is_blocked": false,
+  "isHod" = false,
+   "address": {
+      "street": "Kulas Light",
+      "city": "Gwenborough",
+      "state": "Apt. 556",
+      "zipcode": "92998-3874",
+    }
+}
+
+studentModel
+{
+  "student_id": ":"student_id",
+  "email": "email",
+
+  "rollno":23432,
+  "student_name":"student_name",
+  "father_name":"father_name",
+  "cnic":"cnic",
+  "phone":"phone",
+  "batch_id":"batch_id",
+  "is_blocked": false,
+  
+   "address": {
+      "street": "Kulas Light",
+      "city": "Gwenborough",
+      "state": "Apt. 556",
+      "zipcode": "92998-3874",
+    }
+}
+
+roomModel
+{
+  "room_id": 1,
+  "compacity": 2,
+  "block": "block",
+  "islab" : false 
+}
+
+transportModel
+{
+
+  "bus_id": 1,
+  "driver_name": "driver_name",
+  "departure_time":"departure_time",
+  "arrival_time":"arrival_time",
+  "day_of_week":"day_of_week",
+
+}
+
+attendanceModel
+{
+  "student_id": "student_id",
+ "mark" : "Present",
+  "date": "date",
+}

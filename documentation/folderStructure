@@ -1,0 +1,25 @@
+/lib
+  /common                 // Common utilities, constants, enums
+  /data                   // Data layer
+    /models               // Data models
+    /repositories         // Data repositories
+  /presentation           // Presentation layer (MVVM)
+    /student              // Student portal
+      /viewmodels         // View models
+      /views              // Views (screens and widgets)
+    /hod                  // HOD portal
+      /viewmodels         // View models
+      /views              // Views (screens and widgets)
+    /teacher              // Teacher portal
+      /viewmodels         // View models
+      /views              // Views (screens and widgets)
+    /bloc                 // BLoC for state management
+      /student            // BLoC for student portal
+      /hod                // BLoC for HOD portal
+      /teacher            // BLoC for teacher portal
+  /services               // Firebase services
+  /navigation             // Navigation management
+  /theme                  // Theme configuration
+  /utils                  // Utility classes
+  /app.dart               // App entry point
+  /locator.dart           // Service locator setup
