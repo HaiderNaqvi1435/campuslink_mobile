@@ -11,6 +11,8 @@ class TeacherDataModel extends UserDataModel {
     super.fatherName,
     super.cnic,
     super.phone,
+    super.gender,
+    super.dob,
     super.address,
     super.role,
     super.isBlocked,
@@ -24,5 +26,26 @@ class TeacherDataModel extends UserDataModel {
     data['department_id'] = departmentId;
     data['isHod'] = isHod;
     return data;
+  }
+
+  factory TeacherDataModel.fromJson(Map<String, dynamic> json) {
+    // Initialize fields from the UserDataModel
+    UserDataModel userData = UserDataModel.fromJson(json);
+    return TeacherDataModel(
+      userId: userData.userId,
+      email: userData.email,
+      name: userData.name,
+      fatherName: userData.fatherName,
+      cnic: userData.cnic,
+      phone: userData.phone,
+      gender: userData.gender,
+      dob: userData.dob,
+      address: userData.address,
+      role: userData.role,
+      isBlocked: userData.isBlocked,
+      // Initialize fields specific to TeacherDataModel
+      departmentId: json['department_id'],
+      isHod: json['isHod'],
+    );
   }
 }

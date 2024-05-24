@@ -1,4 +1,7 @@
 import 'package:campuslink_mobile/presentation/common/views/complaint_view/complaint_view.dart';
+import 'package:campuslink_mobile/presentation/common/views/complaint_view/new_complain_view.dart';
+import 'package:campuslink_mobile/presentation/common/views/dashboard_view/dashboard_view.dart';
+import 'package:campuslink_mobile/presentation/common/views/login_view/forget_password_view/forget_password_view.dart';
 import 'package:campuslink_mobile/presentation/common/views/login_view/initial_login_view.dart';
 import 'package:campuslink_mobile/presentation/common/views/notification_view/notification_view.dart';
 import 'package:campuslink_mobile/presentation/common/views/splash_view/splash_view.dart';
@@ -6,9 +9,9 @@ import 'package:campuslink_mobile/presentation/common/views/transport_view/trans
 import 'package:campuslink_mobile/presentation/common/views/courses_view/courses_view.dart';
 import 'package:campuslink_mobile/presentation/student_features/view/student_sign_up_view/student_sign_up_view.dart';
 import 'package:campuslink_mobile/presentation/student_features/view/student_attendance_view/student_attendance_view.dart';
-import 'package:campuslink_mobile/presentation/student_features/view/student_dashboard_view/student_dashboard_view.dart';
 import 'package:campuslink_mobile/presentation/common/views/timetable_view/timetable_view.dart';
-import 'package:campuslink_mobile/presentation/teacher_features/view/teacher_dashboard_view/teacher_dashboard_view.dart';
+import 'package:campuslink_mobile/presentation/teacher_features/view/teacher_attendance_view/teacher_attendance_view.dart';
+import 'package:campuslink_mobile/presentation/teacher_features/view/teacher_attendance_view/view_attendance_view.dart';
 import 'package:campuslink_mobile/presentation/teacher_features/view/teacher_sign_up_view/teacher_sign_up_view.dart';
 import 'package:campuslink_mobile/res/routes/routes_name.dart';
 import 'package:get/get.dart';
@@ -48,8 +51,8 @@ class AppRoutes {
           transition: Transition.leftToRightWithFade,
         ),
         GetPage(
-          name: RouteName.studentDashboardView,
-          page: () => const StudentDashboardView(),
+          name: RouteName.dashboardView,
+          page: () => const DashboardView(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
         ),
@@ -90,8 +93,26 @@ class AppRoutes {
           transition: Transition.leftToRightWithFade,
         ),
         GetPage(
-          name: RouteName.teacherDashboardView,
-          page: () => const TeacherDashboardView(),
+          name: RouteName.teacherAttendanceView,
+          page: () => const TeacherAttendanceView(),
+          transitionDuration: const Duration(milliseconds: 250),
+          transition: Transition.leftToRightWithFade,
+        ),
+        GetPage(
+          name: RouteName.viewAttendanceView,
+          page: () => const ViewAttendanceView(),
+          transitionDuration: const Duration(milliseconds: 250),
+          transition: Transition.leftToRightWithFade,
+        ),
+        GetPage(
+          name: RouteName.forgetPasswordView,
+          page: () => const ForgetPasswordView(),
+          transitionDuration: const Duration(milliseconds: 250),
+          transition: Transition.leftToRightWithFade,
+        ),
+        GetPage(
+          name: RouteName.newComplainView,
+          page: () => const NewComplainView(),
           transitionDuration: const Duration(milliseconds: 250),
           transition: Transition.leftToRightWithFade,
         ),

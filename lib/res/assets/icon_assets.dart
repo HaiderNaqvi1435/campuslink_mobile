@@ -5,4 +5,5 @@ class IconAssets {
   static const String transportIcon = 'assets/icons/transport.png';
   static const String timetableIcon = 'assets/icons/timetable.png';
   static const String booksIcon = 'assets/icons/books.png';
+  static const String logoutIcon = 'assets/icons/logout.png';
 }

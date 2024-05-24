@@ -1,3 +1,4 @@
+import 'package:campuslink_mobile/utils/app_text_styles/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,14 +11,12 @@ class AuthDropdown extends StatelessWidget {
     required this.labelText,
     required this.items,
     this.onChanged,
-    this.value,
   });
 
   final String labelText;
   final String hintText;
-  final List<String> items;
+  final List<DropdownMenuItem<String>>? items;
   final ValueChanged<String?>? onChanged;
-  final String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -26,24 +25,18 @@ class AuthDropdown extends StatelessWidget {
       children: [
         Text(
           "${labelText.tr}:",
-          style: const TextStyle(color: AppColor.labelColor, fontSize: 14),
+          style: AppTextStyles.labelText,
         ),
         const SizedBox(height: 5),
         DropdownButtonFormField<String>(
-          value: value,
+          style: AppTextStyles.blackNormalText,
           onChanged: onChanged,
-          items: items.map((String item) {
-            return DropdownMenuItem<String>(
-              
-              value: item,
-              child: Text(item),
-            );
-          }).toList(),
+          items: items,
           decoration: InputDecoration(
             fillColor: AppColor.fillColor1,
             filled: true,
             hintText: hintText.tr,
-            hintStyle: const TextStyle(color: AppColor.hintColor, fontSize: 14),
+            hintStyle: AppTextStyles.hintText,
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 5, horizontal: 22),
             border: OutlineInputBorder(

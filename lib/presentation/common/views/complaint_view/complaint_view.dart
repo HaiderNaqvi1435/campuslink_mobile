@@ -1,11 +1,15 @@
 import 'package:campuslink_mobile/presentation/common/view_models/complaint_view_model/complaint_view_model.dart';
+import 'package:campuslink_mobile/res/routes/routes_name.dart';
 import 'package:campuslink_mobile/theme/app_theme_wiget/app_theme_wiget.dart';
-import 'package:campuslink_mobile/utils/padding_utils/padding_utils.dart';
+import 'package:campuslink_mobile/utils/app_box_decorations/app_box_decorations.dart';
+import 'package:campuslink_mobile/utils/app_text_styles/app_text_styles.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../res/colors/app_color.dart';
-import '../../../../res/components/complaint_list_tile/complaint_list_tile.dart';
+import 'widgets/show_complaint_details.dart';
 
 class ComplaintView extends StatefulWidget {
   const ComplaintView({super.key});
@@ -21,32 +25,48 @@ class _ComplaintViewState extends State<ComplaintView> {
     return AppThemeWidget(
         title: "Complaint Box",
         floatingActionButton: FloatingActionButton(
+            mini: true,
             backgroundColor: AppColor.primaryButtonColor,
             foregroundColor: AppColor.whiteColor,
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(RouteName.newComplainView);
+            },
             child: const Icon(Icons.add)),
-        child: Padding(
-          padding: PaddingUtils.defaultPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "recent_complaints".tr,
-                style:
-                    const TextStyle(fontSize: 12, color: AppColor.labelColor),
-              ),
-              Expanded(
-                child: ListView.builder(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "recent_complaints".tr,
+              style: const TextStyle(fontSize: 12, color: AppColor.labelColor),
+            ),
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
                   itemCount: cvm.filteredComplaints.length,
                   itemBuilder: (context, index) {
-                    return ComplaintListTile(
-                      complaint: cvm.filteredComplaints[index],
+                    return Container(
+                      decoration: AppBoxDecoration.underLinedBox,
+                      child: ListTile(
+                        dense: true,
+                        onTap: () => showComplaintDetails(
+                            context, cvm.filteredComplaints[index]),
+                        leading: const Icon(
+                          Icons.report_problem_rounded,
+                          color: AppColor.primaryColor,
+                        ),
+                        title: Text(cvm.filteredComplaints[index].title!,
+                            style: AppTextStyles.primaryHeading0),
+                        subtitle: Text(
+                            DateFormat('dd MMMM yyyy').format(
+                                cvm.filteredComplaints[index].dateTime!),
+                            style: AppTextStyles.labelTextBold),
+                      ),
                     );
                   },
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ));
   }
 }

@@ -1,10 +1,8 @@
-import 'package:campuslink_mobile/utils/enums/enums.dart';
-
 class NotificationModel {
   String? id;
   String? title;
   String? body;
-  Audience? audience;
+  String? audience;
   String? departmentId;
   DateTime ? dateTime;
 

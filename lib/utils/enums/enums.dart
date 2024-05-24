@@ -1,4 +1,4 @@
 enum UserRole { teacher, student }
-
-
-enum Audience{faculty, students , both}
+enum Gender { male , female }
+enum SessionType { morning , replica }
+enum AttendanceStatus { present , absent, leave }

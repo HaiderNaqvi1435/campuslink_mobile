@@ -6,6 +6,9 @@ class AppColor {
   static const Color whiteColor = Color(0xffffffff);
   static const Color redColor = Color(0xffFC3F5B);
   static const Color indicatorColor = Color(0xffAFB9D2);
+  static const Color greyColor1 = Color(0xffD9D9D9);
+  static const Color greenColor1 = Color(0xff047857);
+  static const Color orangeColor1 = Color(0xffFF725E);
 
 //textfield colors
   static const Color strokeColor1 = Color(0xff1E1F21);

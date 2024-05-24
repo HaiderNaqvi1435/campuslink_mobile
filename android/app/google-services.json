@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "495585436205",
+    "project_id": "campuslink-a2d2d",
+    "storage_bucket": "campuslink-a2d2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495585436205:android:32266ef968986816d6cea4",
+        "android_client_info": {
+          "package_name": "com.example.campuslink_desktop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm1QyXuh-r2LslWXbshCxBRdS6zAELoIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495585436205:android:b14f264ece9c0bacd6cea4",
+        "android_client_info": {
+          "package_name": "com.example.campuslink_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm1QyXuh-r2LslWXbshCxBRdS6zAELoIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

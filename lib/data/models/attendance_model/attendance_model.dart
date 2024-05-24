@@ -1,18 +1,29 @@
+import 'package:campuslink_mobile/utils/enums/enums.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class AttendanceModel {
   String? studentId;
   String? teacherId;
   String? courseId;
-  String? mark;
-  String? date;
+  AttendanceStatus? status;
+  DateTime? date;
 
-  AttendanceModel({this.studentId, this.mark, this.date});
+  AttendanceModel(
+      {this.courseId, this.teacherId, this.studentId, this.status, this.date});
 
   AttendanceModel.fromJson(Map<String, dynamic> json) {
     studentId = json['student_id'];
     teacherId = json['teacher_Id'];
     courseId = json['course_Id'];
-    mark = json['mark'];
-    date = json['date'];
+    if (json['status'] == 'present') {
+      status = AttendanceStatus.present;
+    } else if (json['status'] == 'absent') {
+      status = AttendanceStatus.absent;
+    } else {
+      status = AttendanceStatus.leave;
+    }
+    Timestamp timestamp = json['date'];
+    date = timestamp.toDate();
   }
 
   Map<String, dynamic> toJson() {
@@ -20,7 +31,13 @@ class AttendanceModel {
     data['student_id'] = studentId;
     data['teacher_Id'] = teacherId;
     data['course_Id'] = courseId;
-    data['mark'] = mark;
+    if (status == AttendanceStatus.present) {
+      data['status'] = 'present';
+    } else if (status == AttendanceStatus.absent) {
+      data['status'] = 'absent';
+    } else {
+      data['status'] = 'leave';
+    }
     data['date'] = date;
     return data;
   }

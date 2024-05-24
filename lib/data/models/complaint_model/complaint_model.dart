@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ComplaintModel {
   String? id;
   String? title;
@@ -12,7 +14,8 @@ class ComplaintModel {
     id = json['id'];
     title = json['title'];
     body = json['body'];
-    dateTime = json['date_time'];
+    Timestamp timestamp = json['date_time'];
+    dateTime = timestamp.toDate();
     complainantId = json['complainant_id'];
   }
 

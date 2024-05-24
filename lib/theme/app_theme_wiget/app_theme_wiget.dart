@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../res/colors/app_color.dart';
+import '../../utils/padding_utils/padding_utils.dart';
 
 class AppThemeWidget extends StatelessWidget {
   final Widget child;
@@ -56,7 +57,10 @@ class AppThemeWidget extends StatelessWidget {
                 topRight: Radius.circular(26),
               ),
             ),
-            child: child),
+            child: Padding(
+              padding: PaddingUtils.defaultPadding,
+              child: child,
+            )),
         floatingActionButton: floatingActionButton,
       ),
     );

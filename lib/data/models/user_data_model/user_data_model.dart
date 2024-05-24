@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../../utils/enums/enums.dart';
 import 'address_model/address_model.dart';
 
@@ -7,6 +9,8 @@ class UserDataModel {
   String? name;
   String? fatherName;
   String? cnic;
+  Gender? gender;
+  DateTime? dob;
   String? phone;
   Address? address;
   UserRole? role;
@@ -18,6 +22,8 @@ class UserDataModel {
     this.name,
     this.fatherName,
     this.cnic,
+    this.gender,
+    this.dob,
     this.phone,
     this.address,
     this.role,
@@ -30,9 +36,13 @@ class UserDataModel {
     name = json['name'];
     fatherName = json['father_name'];
     cnic = json['cnic'];
+    gender = json['gender'] == 'male' ? Gender.male : Gender.female;
+    Timestamp timestamp = json['dob'];
+    dob = timestamp.toDate();
     phone = json['phone'];
-    isBlocked = json['isBlocked'];
-    address = json['address'] != null ? Address.fromJson(json['address']) : null;
+    isBlocked = json['is_blocked'];
+    address =
+        json['address'] != null ? Address.fromJson(json['address']) : null;
     role = json['role'] == 'teacher' ? UserRole.teacher : UserRole.student;
   }
 
@@ -43,6 +53,8 @@ class UserDataModel {
     data['name'] = name;
     data['father_name'] = fatherName;
     data['cnic'] = cnic;
+    data['gender'] = gender == Gender.male ? 'male' : 'female';
+    data['dob'] = dob;
     data['phone'] = phone;
     data['is_blocked'] = isBlocked;
 
