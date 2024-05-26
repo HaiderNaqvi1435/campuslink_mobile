@@ -1,5 +1,6 @@
 import 'package:campuslink_mobile/presentation/common/view_models/timetable_view_model/timetable_view_model.dart';
 import 'package:campuslink_mobile/theme/app_theme_wiget/app_theme_wiget.dart';
+import 'package:campuslink_mobile/utils/week_days_manager/week_days_manager.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,7 @@ class _TimeTableViewState extends State<TimeTableView> {
             WeekDaysListView(
               onTap: (value) => tvm.selectedIndex.value = value,
               selectedIndex: tvm.selectedIndex.value,
-              days: tvm.days,
+              days: WeekDaysManager.days,
             ),
             const SizedBox(height: 20),
             Expanded(

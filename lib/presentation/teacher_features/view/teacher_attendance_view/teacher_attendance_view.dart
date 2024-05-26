@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:campuslink_mobile/presentation/common/view_models/attendance_view_model/attendance_view_model.dart';
 import 'package:campuslink_mobile/presentation/common/view_models/controller/batch_controller/batch_controller.dart';
 import 'package:campuslink_mobile/presentation/common/view_models/course_view_model/course_view_model.dart';
@@ -12,7 +10,6 @@ import 'package:campuslink_mobile/utils/utils.dart';
 import 'package:flutter/material.dart' hide SearchBar;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../res/components/attendance_button/attendance_button.dart';
 import '../../../../res/components/custom_icon_button/custom_icon_button.dart';
 import '../../../../res/components/search_bar/search_bar.dart';
@@ -20,7 +17,6 @@ import '../../../../utils/enums/enums.dart';
 
 class TeacherAttendanceView extends StatefulWidget {
   const TeacherAttendanceView({super.key});
-
   @override
   State<TeacherAttendanceView> createState() => _TeacherAttendanceViewState();
 }
@@ -29,7 +25,6 @@ class _TeacherAttendanceViewState extends State<TeacherAttendanceView> {
   final avm = Get.find<AttendanceViewModel>();
   final bvm = Get.find<BatchController>();
   final cvm = Get.find<CourseViewModel>();
-
   @override
   Widget build(BuildContext context) {
     return AppThemeWidget(
@@ -46,12 +41,10 @@ class _TeacherAttendanceViewState extends State<TeacherAttendanceView> {
             try {
               await avm.markAttendance();
               avm.isLoading(false);
-
               Utils.showSnackBar(context, "Attendance marked successfully");
               print("Attendance marked successfully");
             } catch (e) {
               avm.isLoading(false);
-
               Utils.showSnackBar(
                 context,
                 "Failed to mark attendance",
@@ -60,7 +53,6 @@ class _TeacherAttendanceViewState extends State<TeacherAttendanceView> {
             }
           } else {
             avm.isLoading(false);
-
             Utils.showSnackBar(
               context,
               "All students must be marked",
@@ -110,23 +102,13 @@ class _TeacherAttendanceViewState extends State<TeacherAttendanceView> {
             Obx(
               () => CustomIconButton(
                 onPressed: () async => avm.input.dateTime.value =
-                    (await Utils. selectDate(context, avm.input.dateTime.value))!,
+                    (await Utils.selectDate(
+                        context, avm.input.dateTime.value))!,
                 label:
                     DateFormat('dd MMMM yyyy').format(avm.input.dateTime.value),
                 icon: Icons.calendar_month_outlined,
               ),
             ),
-            // Obx(
-            //   () => Row(
-            //     children: [
-
-            //       Text(
-            //         DateFormat('dd MMMM yyyy').format(avm.input.dateTime.value),
-            //         style: AppTextStyles.secondaryHeading2,
-            //       ),
-            //     ],
-            //   ),
-            // )
           ],
         ),
         Expanded(

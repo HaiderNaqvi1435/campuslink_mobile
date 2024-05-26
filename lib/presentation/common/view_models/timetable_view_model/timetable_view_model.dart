@@ -1,5 +1,7 @@
 import 'package:campuslink_mobile/presentation/common/view_models/controller/auth_controller/auth_controller.dart';
 import 'package:campuslink_mobile/services/firebase_services/firebase_schedule_services/firebase_schedule_services.dart';
+import 'package:campuslink_mobile/utils/week_days_manager/week_days_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,13 +16,7 @@ class TimeTableViewModel extends GetxController {
   RxInt selectedIndex = 0.obs;
   final ac = Get.find<AuthController>();
   final RxBool isTeacher = false.obs;
-  final RxList<String> days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-  ].obs;
+  
   @override
   void onInit() async {
     super.onInit();
@@ -41,7 +37,9 @@ class TimeTableViewModel extends GetxController {
             : updateStudentFilteredSchedule());
   }
   Future<void> getUserCourses() async {
-    print("Fetching user courses...");
+    if (kDebugMode) {
+      print("Fetching user courses...");
+    }
     Set<String> uniqueKeys =
         {}; // Track unique combinations of batchId, courseCode, and teacherId
     List<TimeTableModel> uniqueCourses = [];
@@ -73,7 +71,7 @@ class TimeTableViewModel extends GetxController {
   //   filteredScheduleList.assignAll(scheduleList);
   // }
   void updateStudentFilteredSchedule() {
-    final selectedDay = days[selectedIndex.value];
+    final selectedDay = WeekDaysManager.days[selectedIndex.value];
     filteredScheduleList.assignAll(scheduleList
         .where((schedule) =>
             schedule.dayOfWeek == selectedDay &&
@@ -82,7 +80,7 @@ class TimeTableViewModel extends GetxController {
   }
 
   void updateTeacherFilteredSchedule() {
-    final selectedDay = days[selectedIndex.value];
+    final selectedDay = WeekDaysManager.days[selectedIndex.value];
     filteredScheduleList.assignAll(scheduleList
         .where((schedule) =>
             schedule.dayOfWeek == selectedDay &&

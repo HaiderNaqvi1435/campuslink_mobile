@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../../../utils/enums/enums.dart';
+
 class NotificationModel {
   String? id;
   String? title;
   String? body;
-  String? audience;
+  Audience? audience;
   String? departmentId;
-  DateTime ? dateTime;
+  DateTime? dateTime;
 
   NotificationModel(
       {this.id,
@@ -18,9 +22,15 @@ class NotificationModel {
     id = json['id'];
     title = json['title'];
     body = json['body'];
-    audience = json['audience'];
+    if (json['audience'] == "faculty") {
+      audience = Audience.faculty;
+    } else if (json['audience'] == "students") {
+      audience = Audience.students;
+    } else {
+      audience = Audience.both;
+    }
     departmentId = json['department_id'];
-    dateTime = json['date_time'];
+    dateTime = (json['date_time'] as Timestamp).toDate();
   }
 
   Map<String, dynamic> toJson() {
@@ -28,7 +38,13 @@ class NotificationModel {
     data['id'] = id;
     data['title'] = title;
     data['body'] = body;
-    data['audience'] = audience;
+    if (audience == Audience.faculty) {
+      data['audience'] = "faculty";
+    } else if (audience == Audience.students) {
+      data['audience'] = "students";
+    } else {
+      data['audience'] = "both";
+    }
     data['department_id'] = departmentId;
     data['date_time'] = dateTime;
     return data;

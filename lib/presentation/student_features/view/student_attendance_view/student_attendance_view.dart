@@ -6,14 +6,12 @@ import 'package:campuslink_mobile/utils/app_box_decorations/app_box_decorations.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../res/colors/app_color.dart';
 import '../../../../utils/app_text_styles/app_text_styles.dart';
 import '../../../../utils/enums/enums.dart';
 
 class StudentAttendanceView extends StatefulWidget {
   const StudentAttendanceView({super.key});
-
   @override
   State<StudentAttendanceView> createState() => _StudentAttendanceViewState();
 }
@@ -60,14 +58,10 @@ class _StudentAttendanceViewState extends State<StudentAttendanceView> {
                   ),
                 );
               }
-
               return ListView.builder(
                 itemCount: savm.studentCourseAttendance.length,
                 itemBuilder: (context, index) {
                   final attendance = savm.studentCourseAttendance[index];
-                  // final student = avm.studentList
-                  //     .firstWhere((s) => s.userId == attendance.studentId);
-
                   return Container(
                     decoration: AppBoxDecoration.underLinedBox,
                     child: ListTile(
@@ -80,13 +74,6 @@ class _StudentAttendanceViewState extends State<StudentAttendanceView> {
                         DateFormat('dd MMMM yyyy').format(attendance.date!),
                         style: AppTextStyles.secondaryNormalText1,
                       ),
-                      // title:
-                      //     Text(student.name!, style: AppTextStyles.blackHeading1),
-                      // subtitle: Text(
-                      //   "Date: ${DateFormat('dd MMMM yyyy').format(attendance.date!)}",
-                      //   style: AppTextStyles.blackNormalText,
-                      // ),
-
                       trailing: Text(
                         attendance.status
                             .toString()

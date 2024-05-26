@@ -1,12 +1,14 @@
-import 'package:campuslink_mobile/data/models/transport_model/transport_model.dart';
+import 'package:campuslink_mobile/presentation/common/view_models/transport_view_model/transport_view_model.dart';
 import 'package:campuslink_mobile/theme/app_theme_wiget/app_theme_wiget.dart';
+import 'package:campuslink_mobile/utils/app_text_styles/app_text_styles.dart';
+import 'package:campuslink_mobile/utils/date_formatter/date_formatter.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 import '../../../../res/colors/app_color.dart';
 import '../../../../res/components/week_days_list_view/week_days_list_view.dart';
+import '../../../../utils/week_days_manager/week_days_manager.dart';
 
 class TransportView extends StatefulWidget {
   const TransportView({super.key});
@@ -16,140 +18,161 @@ class TransportView extends StatefulWidget {
 }
 
 class _TransportViewState extends State<TransportView> {
-  final List<String> days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-  ];
-  List<TransportModel> transportList = [
-    TransportModel(
-        arrivalTime: '06:14AM',
-        departureTime: '12:05PM',
-        driverName: 'Mushtaq Khan',
-        busId: 'LEA-5166',
-        dayOfWeek: 'Monday'),
-    TransportModel(
-        arrivalTime: '09:30AM',
-        departureTime: '03:45PM',
-        driverName: 'Jane Doe',
-        busId: 'LXZ-4821',
-        dayOfWeek: 'Wednesday'),
-    TransportModel(
-        arrivalTime: '01:50PM',
-        departureTime: '08:17PM',
-        driverName: 'Sara Johnson',
-        busId: 'LXZ-1590',
-        dayOfWeek: 'Friday'),
-  ];
-  int selectedIndex = 0;
+  final tpvm = Get.put(TransportViewModel());
   @override
   Widget build(BuildContext context) {
-    List<TransportModel> filteredtransportList = transportList
-        .where((element) => element.dayOfWeek == days[selectedIndex])
-        .toList();
     return AppThemeWidget(
         title: "Transport",
         child: Column(
           children: [
-            SizedBox(
-              height: 30,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: days.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    // onTap: () {
-                    //   setState(() {
-                    //     selectedIndex = index;
-                    //   });
-                    // },
-                    child: WeekDaysListView(
-                        selectedIndex: selectedIndex, days: days),
-                  );
-                },
+            Obx(
+              () => WeekDaysListView(
+                onTap: (value) => tpvm.selectedIndex.value = value,
+                selectedIndex: tpvm.selectedIndex.value,
+                days: WeekDaysManager.days,
               ),
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: ListView.builder(
-                itemCount: filteredtransportList.length,
-                itemBuilder: (context, index) => Card(
-                  elevation: 0,
-                  color: AppColor.whiteColor,
-                  shape: RoundedRectangleBorder(
-                      side: const BorderSide(color: AppColor.hintColor),
-                      borderRadius: BorderRadius.circular(12)),
-                  child: ListTile(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Departure Time",
-                              style: TextStyle(
-                                  color: AppColor.primaryColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "Arrival Time",
-                              style: TextStyle(
-                                  color: AppColor.primaryColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "Bus no.",
-                              style: TextStyle(
-                                  color: AppColor.primaryColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "Driver Name",
-                              style: TextStyle(
-                                  color: AppColor.primaryColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              filteredtransportList[index].departureTime!,
-                              style: const TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              filteredtransportList[index].arrivalTime!,
-                              style: const TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              filteredtransportList[index].busId!,
-                              style: const TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              filteredtransportList[index].driverName!,
-                              style: const TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              child: Obx(
+                () => tpvm.filteredTransportList.isEmpty
+                    ? Center(
+                        child: Text(
+                            "No conveyance available on ${WeekDaysManager.days[tpvm.selectedIndex.value]}"),
+                      )
+                    : ListView.builder(
+                        itemCount: tpvm.filteredTransportList.length,
+                        itemBuilder: (context, index) => Card(
+                            elevation: 0,
+                            color: AppColor.whiteColor,
+                            shape: RoundedRectangleBorder(
+                                side:
+                                    const BorderSide(color: AppColor.hintColor),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: ListTile(
+                                title: Text(
+                                  "Route ${index + 1}:",
+                                  style: AppTextStyles.primaryHeading1,
+                                ),
+                                subtitle: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          tpvm.filteredTransportList[index]
+                                                  .driverName ??
+                                              "",
+                                          style:
+                                              AppTextStyles.secondaryHeading1,
+                                        ),
+                                        const Text(
+                                          "Timing",
+                                          style:
+                                              AppTextStyles.secondaryHeading1,
+                                        ),
+                                        const Text(
+                                          "Route",
+                                          style:
+                                              AppTextStyles.secondaryHeading1,
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          tpvm.filteredTransportList[index]
+                                                  .busId ??
+                                              "",
+                                          style: AppTextStyles.blackNormalText,
+                                        ),
+                                        Text(
+                                          "${DateFormatter.getFormattedTime(tpvm.filteredTransportList[index].departureTime!)} - ${DateFormatter.getFormattedTime(tpvm.filteredTransportList[index].arrivalTime!)}",
+                                          style: AppTextStyles.blackNormalText,
+                                        ),
+                                        Text(
+                                          "${tpvm.filteredTransportList[index].source} - ${tpvm.filteredTransportList[index].destination}",
+                                          style: AppTextStyles.blackNormalText,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ))),
+                      ),
               ),
             )
           ],
         ));
   }
 }
+// ListTile(
+//                     title: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         const Column(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Text(
+//                               "Departure Time",
+//                               style: TextStyle(
+//                                   color: AppColor.primaryColor,
+//                                   fontSize: 10,
+//                                   fontWeight: FontWeight.bold),
+//                             ),
+//                             Text(
+//                               "Arrival Time",
+//                               style: TextStyle(
+//                                   color: AppColor.primaryColor,
+//                                   fontSize: 10,
+//                                   fontWeight: FontWeight.bold),
+//                             ),
+//                             Text(
+//                               "Bus no.",
+//                               style: TextStyle(
+//                                   color: AppColor.primaryColor,
+//                                   fontSize: 10,
+//                                   fontWeight: FontWeight.bold),
+//                             ),
+//                             Text(
+//                               "Driver Name",
+//                               style: TextStyle(
+//                                   color: AppColor.primaryColor,
+//                                   fontSize: 10,
+//                                   fontWeight: FontWeight.bold),
+//                             ),
+//                           ],
+//                         ),
+//                         Column(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Text(
+//                             DateFormatter.getFormattedTime(tpvm.filteredTransportList[index].departureTime!)  ,
+//                               style: const TextStyle(
+//                                   fontSize: 10, fontWeight: FontWeight.bold),
+//                             ),
+//                             Text(
+//                                                        DateFormatter.getFormattedTime(tpvm.filteredTransportList[index].departureTime!)  ,
+
+//                               style: const TextStyle(
+//                                   fontSize: 10, fontWeight: FontWeight.bold),
+//                             ),
+//                             Text(
+//                               filteredtransportList[index].busId!,
+//                               style: const TextStyle(
+//                                   fontSize: 10, fontWeight: FontWeight.bold),
+//                             ),
+//                             Text(
+//                               filteredtransportList[index].driverName!,
+//                               style: const TextStyle(
+//                                   fontSize: 10, fontWeight: FontWeight.bold),
+//                             ),
+//                           ],
+//                         )
+//                       ],
+//                     ),
+//                   ),
