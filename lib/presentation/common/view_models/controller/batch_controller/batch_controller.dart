@@ -26,7 +26,13 @@ class BatchController extends GetxController {
         )
         .semester!;
   }
-
+  String getDeptFromBatchId(String batchId) {
+    return batchesList
+        .firstWhere(
+          (batch) => batch.batchId == batchId,
+        )
+        .departmentId!;
+  }
   List<DropdownMenuItem<String>>? getBatchDropdownItems() => batchesList
       .map((batch) => DropdownMenuItem(
             value: batch.batchId,

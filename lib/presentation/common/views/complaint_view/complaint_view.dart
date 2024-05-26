@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../res/colors/app_color.dart';
-import 'widgets/show_complaint_details.dart';
+import '../../../../services/firebase_services/firebase_complaint_services/firebase_complaint_services.dart';
+import '../../../../res/widgets/build_title_body_bottom_sheet.dart';
 
 class ComplaintView extends StatefulWidget {
   const ComplaintView({super.key});
@@ -48,8 +49,23 @@ class _ComplaintViewState extends State<ComplaintView> {
                       decoration: AppBoxDecoration.underLinedBox,
                       child: ListTile(
                         dense: true,
-                        onTap: () => showComplaintDetails(
-                            context, cvm.filteredComplaints[index]),
+                        onTap: () => showtitleBodyBottomSheet(
+                          context,
+                          title: cvm.filteredComplaints[index].title!,
+                          body: cvm.filteredComplaints[index].body,
+                          dateTime: cvm.filteredComplaints[index].dateTime,
+                          iconButton: IconButton(
+                              onPressed: () async {
+                                await FirebaseComplaintServices.deleteComplaint(
+                                    cvm.filteredComplaints[index].id!);
+                                cvm.getComplaints();
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: AppColor.primaryColor,
+                              )),
+                        ),
                         leading: const Icon(
                           Icons.report_problem_rounded,
                           color: AppColor.primaryColor,

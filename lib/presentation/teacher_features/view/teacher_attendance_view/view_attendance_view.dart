@@ -22,6 +22,7 @@ class _ViewAttendanceViewState extends State<ViewAttendanceView> {
   @override
   void initState() {
     avm.getAttendanceByBatchAndCourse(context);
+    avm.attendanceDate.value = DateTime.now();
     super.initState();
   }
 
@@ -36,7 +37,7 @@ class _ViewAttendanceViewState extends State<ViewAttendanceView> {
             children: [
               const Text(
                 "Attendance",
-                style: AppTextStyles.blackHeading2,
+                style: AppTextStyles.primaryHeading2,
               ),
               Obx(
                 () => CustomIconButton(
@@ -57,7 +58,6 @@ class _ViewAttendanceViewState extends State<ViewAttendanceView> {
                 return const Center(
                   child: Text(
                     "No attendance records found",
-                    style: AppTextStyles.primaryHeading1,
                   ),
                 );
               }

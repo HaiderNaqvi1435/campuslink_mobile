@@ -1,15 +1,56 @@
+import 'package:campuslink_mobile/presentation/common/view_models/controller/batch_controller/batch_controller.dart';
+import 'package:campuslink_mobile/presentation/common/view_models/timetable_view_model/timetable_view_model.dart';
+import 'package:campuslink_mobile/services/firebase_services/firebase_notification_services/firebase_notification_services.dart';
+import 'package:campuslink_mobile/utils/enums/enums.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/models/notification_model/notification_model.dart';
 
 class NotificationViewModel extends GetxController {
-  RxList filteredNotifications = <NotificationModel>[].obs;
+  final RxList<NotificationModel> filteredNotifications =
+      <NotificationModel>[].obs;
+  final RxList<NotificationModel> notificationsList = <NotificationModel>[].obs;
+  final tvm = Get.find<TimeTableViewModel>();
+  final bvm = Get.find<BatchController>();
+  @override
+  void onInit() {
+    super.onInit();
+    getNotifications();
+  }
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   filteredNotifications.assignAll(getFilteredNotifications());
-  // }
+// Method to get notifications for teachers
+  Future<void> getTeacherNotifications() async {
+    filteredNotifications.assignAll(notificationsList.where((notification) =>
+        (notification.audience == Audience.faculty ||
+            notification.audience == Audience.both) &&
+        (notification.departmentId == "" ||
+            notification.departmentId == tvm.ac.teacherData!.departmentId)));
+              filteredNotifications.sort((a, b) => b.dateTime!.compareTo(a.dateTime!),);
+
+  }
+
+// Method to get notifications for students
+  Future<void> getStudentNotifications() async {
+    filteredNotifications.assignAll(notificationsList.where((notification) =>
+        (notification.audience == Audience.students ||
+            notification.audience == Audience.both) &&
+        (notification.departmentId == "" ||
+            notification.departmentId ==
+                bvm.getDeptFromBatchId(tvm.ac.studentData!.batchId!))));
+              filteredNotifications.sort((a, b) => b.dateTime!.compareTo(a.dateTime!),);
+  }
+
+// Main method to decide which notifications to fetch based on the user role
+  Future<void> getNotifications() async {
+    notificationsList.value =
+        await FirebaseNotificationServices.getNotifications();
+
+    if (tvm.isTeacher.value) {
+      await getTeacherNotifications();
+    } else {
+      await getStudentNotifications();
+    }
+  }
 
   // List<NotificationModel> getFilteredNotifications() {
   //   return sampledata.randomNotifications.where((notification) {
