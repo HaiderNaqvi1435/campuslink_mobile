@@ -1,5 +1,6 @@
 import 'package:campuslink_mobile/firebase_options.dart';
 import 'package:campuslink_mobile/res/colors/app_color.dart';
+import 'package:campuslink_mobile/utils/bindings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.workSansTextTheme(),
       ),
       getPages: AppRoutes.appRoutes(),
+      initialBinding: InitialBindings(),
     );
   }
 }

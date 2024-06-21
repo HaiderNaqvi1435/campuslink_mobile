@@ -1,3 +1,4 @@
+import 'package:campuslink_mobile/presentation/common/view_models/controller/auth_controller/auth_controller.dart';
 import 'package:campuslink_mobile/presentation/common/view_models/dashboard_view_model/dashboard_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,14 +21,15 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView> {
   final dvm = Get.put(DashboardViewModel());
-   final tvm = Get.put(TimeTableViewModel());
+  final tvm = Get.put(TimeTableViewModel());
   final rc = Get.put(RoomController());
   final fc = Get.put(FacultyController());
   final cvm = Get.put(CourseViewModel());
-
+  final avc = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return AppThemeWidget(
+     
       automaticallyImplyLeading: false,
       title: "Dashboard",
       child: Column(
@@ -77,6 +79,22 @@ class _DashboardViewState extends State<DashboardView> {
                   title: "sign_out",
                   imageAsset: IconAssets.logoutIcon,
                 ),
+                // if (avc.studentData.value.userId == '' &&
+                //     avc.teacherData.value.isHod == true)
+                //   DashboardButton(
+
+                //     onPressed: () {},
+                //     title: "Faculty Schedule",
+                //     imageAsset: IconAssets.transportIcon,
+                //   ),
+                // if (avc.teacherData.value.isHod == true)
+                //   DashboardButton(
+                //     onPressed: () {
+                //       print(avc.studentData.value.userId);
+                //     },
+                //     title: "Batches Schedule",
+                //     imageAsset: IconAssets.transportIcon,
+                //   ),
               ],
             ),
           ),

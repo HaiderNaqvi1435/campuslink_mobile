@@ -9,8 +9,6 @@ import '../../../../res/assets/image_assets.dart';
 import '../../../../res/components/logo_text_widget/logo_text_widget.dart';
 import '../../../../res/widgets/build_progress_indicator.dart';
 import '../../view_models/controller/auth_controller/auth_controller.dart';
-import '../../view_models/controller/batch_controller/batch_controller.dart';
-import '../../view_models/controller/department_controller/department_controller.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -20,11 +18,12 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  final AuthController avm = Get.put(AuthController(), permanent: true);
-  final bc = Get.put(BatchController(), permanent: true);
-  final dc = Get.put(DepartmentController(),permanent: true);
+  // final AuthController avm = Get.put(AuthController(), permanent: true);
+  // final bc = Get.put(BatchController(), permanent: true);
+  // final dc = Get.put(DepartmentController(),permanent: true);
   // final fc= Get.put(FacultyController(),permanent: true);
   // final rc= Get.put(RoomController(),permanent: true);
+  final avm = Get.find<AuthController>();
   @override
   void initState() {
     super.initState();

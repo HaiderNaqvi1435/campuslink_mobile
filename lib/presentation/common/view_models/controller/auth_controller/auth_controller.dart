@@ -17,17 +17,12 @@ class AuthController extends GetxController {
   final RxBool obscureText = true.obs;
   final RxBool isLoading = false.obs;
   late UserCredential userCredential;
-  TeacherDataModel? teacherData;
-  StudentDataModel? studentData;
+  Rx<TeacherDataModel> teacherData = TeacherDataModel().obs;
+  Rx<StudentDataModel> studentData = StudentDataModel().obs;
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
 
-  @override
-  void onInit() {
-    // checkLoginSession();
-    super.onInit();
-    // Set up periodic check for blocked user
-  }
+
 
   void checkLoginSession() async {
     User? currentUser = FirebaseAuth.instance.currentUser;
@@ -41,9 +36,9 @@ class AuthController extends GetxController {
           FirebaseAuth.instance.currentUser!.uid, isTeacher);
       if (result != null) {
         if (isTeacher) {
-          teacherData = result['userData'];
+          teacherData.value = result['userData'];
         } else {
-          studentData = result['userData'];
+          studentData.value = result['userData'];
         }
       }
 
@@ -118,15 +113,15 @@ class AuthController extends GetxController {
 
         userCredential = result['userCredential'];
         if (isTeacher.isTrue) {
-          teacherData = result['userData'];
-          userData = teacherData;
+          teacherData.value = result['userData'];
+          userData = teacherData.value;
         } else {
-          studentData = result['userData'];
-          userData = studentData;
+          studentData.value = result['userData'];
+          userData = studentData.value;
         }
 
         // Check if user is blocked
-        if (userData!.isBlocked!) {
+        if (userData.isBlocked!) {
           message = 'Your account is blocked. Please contact the admin or HOD.';
           Utils.showSnackBar(context, message);
           await FirebaseAuth.instance.signOut();

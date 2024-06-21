@@ -47,7 +47,7 @@ class TimeTableViewModel extends GetxController {
     if (isTeacher.value) {
       for (var course in scheduleList) {
         String key = "${course.batchId}_${course.courseId}_${course.teacherId}";
-        if (course.teacherId == ac.teacherData!.userId! &&
+        if (course.teacherId == ac.teacherData.value.userId! &&
             !uniqueKeys.contains(key)) {
           uniqueKeys.add(key);
           uniqueCourses.add(course);
@@ -56,7 +56,7 @@ class TimeTableViewModel extends GetxController {
     } else {
       for (var course in scheduleList) {
         String key = "${course.batchId}_${course.courseId}_${course.teacherId}";
-        if (course.batchId == ac.studentData!.batchId! &&
+        if (course.batchId == ac.studentData.value.batchId! &&
             !uniqueKeys.contains(key)) {
           uniqueKeys.add(key);
           uniqueCourses.add(course);
@@ -75,7 +75,7 @@ class TimeTableViewModel extends GetxController {
     filteredScheduleList.assignAll(scheduleList
         .where((schedule) =>
             schedule.dayOfWeek == selectedDay &&
-            schedule.batchId == ac.studentData!.batchId)
+            schedule.batchId == ac.studentData.value.batchId)
         .toList());
   }
 
@@ -84,7 +84,7 @@ class TimeTableViewModel extends GetxController {
     filteredScheduleList.assignAll(scheduleList
         .where((schedule) =>
             schedule.dayOfWeek == selectedDay &&
-            schedule.teacherId == ac.teacherData!.userId)
+            schedule.teacherId == ac.teacherData.value.userId)
         .toList());
   }
 }

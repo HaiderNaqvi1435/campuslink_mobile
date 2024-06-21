@@ -70,7 +70,7 @@ class AttendanceViewModel extends GetxController {
     for (var entry in input.attendanceStatus.entries) {
       final attendance = AttendanceModel(
         studentId: entry.key,
-        teacherId: ac.teacherData?.userId,
+        teacherId: ac.teacherData.value.userId,
         courseId: input.courseId.value,
         status: entry.value,
         date: input.dateTime.value,

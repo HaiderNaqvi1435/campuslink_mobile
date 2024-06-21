@@ -24,7 +24,7 @@ class NotificationViewModel extends GetxController {
         (notification.audience == Audience.faculty ||
             notification.audience == Audience.both) &&
         (notification.departmentId == "" ||
-            notification.departmentId == tvm.ac.teacherData!.departmentId)));
+            notification.departmentId == tvm.ac.teacherData.value.departmentId)));
               filteredNotifications.sort((a, b) => b.dateTime!.compareTo(a.dateTime!),);
 
   }
@@ -36,7 +36,7 @@ class NotificationViewModel extends GetxController {
             notification.audience == Audience.both) &&
         (notification.departmentId == "" ||
             notification.departmentId ==
-                bvm.getDeptFromBatchId(tvm.ac.studentData!.batchId!))));
+                bvm.getDeptFromBatchId(tvm.ac.studentData.value.batchId!))));
               filteredNotifications.sort((a, b) => b.dateTime!.compareTo(a.dateTime!),);
   }
 

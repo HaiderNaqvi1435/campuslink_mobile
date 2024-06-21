@@ -16,4 +16,7 @@ class RouteName {
   static const String teacherAttendanceView = '/teacher_attendance_view';
   static const String viewAttendanceView = '/view_attendance_view';
   static const String newComplainView = '/new_complain_view' ;
+  static const String hodBatchScheduleView = '/hod_batch_schedule_view' ;
+  static const String hodFacultyScheduleView = '/hod_faculty_schedule_view' ;
+  static const String profileView = '/profile_view' ;
 }

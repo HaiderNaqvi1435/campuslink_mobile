@@ -102,7 +102,7 @@ class _CoursesViewState extends State<CoursesView> {
                                   tvm.userCourses[index].courseId!;
                               savm.input.batchId.value =
                                   tvm.userCourses[index].batchId!;
-                                  savm.input.studentId.value=ac.studentData!.userId!;
+                                  savm.input.studentId.value=ac.studentData.value.userId!;
                               // Navigate to attendance viewing page
                               Get.toNamed(RouteName.studentAttendanceView);
                             }

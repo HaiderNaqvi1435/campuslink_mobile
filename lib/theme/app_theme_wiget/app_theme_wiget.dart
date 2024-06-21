@@ -1,3 +1,4 @@
+import 'package:campuslink_mobile/res/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,13 +11,14 @@ class AppThemeWidget extends StatelessWidget {
   final bool centerTitle;
   final FloatingActionButton? floatingActionButton;
   final bool automaticallyImplyLeading;
-  const AppThemeWidget(
-      {super.key,
-      required this.child,
-      this.automaticallyImplyLeading = true,
-      this.centerTitle = true,
-      this.floatingActionButton,
-      required this.title});
+  const AppThemeWidget({
+    super.key,
+    required this.child,
+    this.automaticallyImplyLeading = true,
+    this.centerTitle = true,
+    this.floatingActionButton,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +48,24 @@ class AppThemeWidget extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),
+          actions: [
+            GestureDetector(
+              onTap: () => Get.toNamed(RouteName.profileView),
+              child: Container(
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: AppColor.whiteColor,
+                ),
+                child: const Icon(
+                  Icons.person,
+                  color: AppColor.secondaryColor,
+                ),
+              ),
+            ),
+            const SizedBox(width: 20),
+          ],
         ),
         body: Container(
             height: double.maxFinite,

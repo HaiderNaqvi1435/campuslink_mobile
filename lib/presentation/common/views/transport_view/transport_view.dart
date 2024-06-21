@@ -110,69 +110,68 @@ class _TransportViewState extends State<TransportView> {
         ));
   }
 }
-// ListTile(
-//                     title: Row(
-//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                       children: [
-//                         const Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Text(
-//                               "Departure Time",
-//                               style: TextStyle(
-//                                   color: AppColor.primaryColor,
-//                                   fontSize: 10,
-//                                   fontWeight: FontWeight.bold),
-//                             ),
-//                             Text(
-//                               "Arrival Time",
-//                               style: TextStyle(
-//                                   color: AppColor.primaryColor,
-//                                   fontSize: 10,
-//                                   fontWeight: FontWeight.bold),
-//                             ),
-//                             Text(
-//                               "Bus no.",
-//                               style: TextStyle(
-//                                   color: AppColor.primaryColor,
-//                                   fontSize: 10,
-//                                   fontWeight: FontWeight.bold),
-//                             ),
-//                             Text(
-//                               "Driver Name",
-//                               style: TextStyle(
-//                                   color: AppColor.primaryColor,
-//                                   fontSize: 10,
-//                                   fontWeight: FontWeight.bold),
-//                             ),
-//                           ],
-//                         ),
-//                         Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Text(
-//                             DateFormatter.getFormattedTime(tpvm.filteredTransportList[index].departureTime!)  ,
-//                               style: const TextStyle(
-//                                   fontSize: 10, fontWeight: FontWeight.bold),
-//                             ),
-//                             Text(
-//                                                        DateFormatter.getFormattedTime(tpvm.filteredTransportList[index].departureTime!)  ,
 
-//                               style: const TextStyle(
-//                                   fontSize: 10, fontWeight: FontWeight.bold),
-//                             ),
-//                             Text(
-//                               filteredtransportList[index].busId!,
-//                               style: const TextStyle(
-//                                   fontSize: 10, fontWeight: FontWeight.bold),
-//                             ),
-//                             Text(
-//                               filteredtransportList[index].driverName!,
-//                               style: const TextStyle(
-//                                   fontSize: 10, fontWeight: FontWeight.bold),
-//                             ),
-//                           ],
-//                         )
-//                       ],
-//                     ),
-//                   ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
