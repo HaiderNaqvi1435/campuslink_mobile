@@ -22,7 +22,7 @@ class TimeTableView extends StatefulWidget {
 
 class _TimeTableViewState extends State<TimeTableView> {
   final tvm = Get.find<TimeTableViewModel>();
-  final cvm = Get.put(CourseViewModel());
+  final cvm = Get.find<CourseViewModel>();
   final rc = Get.find<RoomController>();
   final fc = Get.find<FacultyController>();
   final bvm = Get.find<BatchController>();

@@ -12,9 +12,8 @@ class FacultyController extends GetxController {
   }
 
   String getTeacherNameById(String userId) {
-    final teacher = facultyList.firstWhere(
-      (teacher) => teacher.userId == userId,
-    );
+    final teacher =
+        facultyList.firstWhere((teacher) => teacher.userId == userId);
     return teacher.name!;
   }
 

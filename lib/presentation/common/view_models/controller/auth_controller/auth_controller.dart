@@ -16,13 +16,11 @@ class AuthController extends GetxController {
   final RxBool isTeacher = false.obs;
   final RxBool obscureText = true.obs;
   final RxBool isLoading = false.obs;
-  late UserCredential userCredential;
+  // late UserCredential userCredential;
   Rx<TeacherDataModel> teacherData = TeacherDataModel().obs;
   Rx<StudentDataModel> studentData = StudentDataModel().obs;
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
-
-
 
   void checkLoginSession() async {
     User? currentUser = FirebaseAuth.instance.currentUser;
@@ -37,12 +35,14 @@ class AuthController extends GetxController {
       if (result != null) {
         if (isTeacher) {
           teacherData.value = result['userData'];
+          studentData.value = StudentDataModel();
         } else {
           studentData.value = result['userData'];
+          teacherData.value = TeacherDataModel();
         }
       }
 
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
         Get.offNamed(RouteName.dashboardView);
       });
     } else {
@@ -103,7 +103,7 @@ class AuthController extends GetxController {
           } else {
             message = 'Login failed. Please try again.';
           }
-          FirebaseAuth.instance.signOut();
+          await FirebaseAuth.instance.signOut();
 
           Utils.showSnackBar(context, message);
           isLoading(false);
@@ -111,13 +111,14 @@ class AuthController extends GetxController {
           return;
         }
 
-        userCredential = result['userCredential'];
         if (isTeacher.isTrue) {
           teacherData.value = result['userData'];
           userData = teacherData.value;
+          studentData.value = StudentDataModel();
         } else {
           studentData.value = result['userData'];
           userData = studentData.value;
+          teacherData.value = TeacherDataModel();
         }
 
         // Check if user is blocked
@@ -163,11 +164,11 @@ class AuthController extends GetxController {
       // Clear stored preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.remove('isTeacher');
-
+      teacherData.value = TeacherDataModel();
+      studentData.value = StudentDataModel();
       // Clear controller states
       emailController.value.clear();
       passwordController.value.clear();
-
       // Delay navigation to ensure widget tree stability
       Future.delayed(const Duration(milliseconds: 100), () async {
         if (Get.context != null && Get.isOverlaysOpen == false) {

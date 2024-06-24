@@ -18,12 +18,8 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  // final AuthController avm = Get.put(AuthController(), permanent: true);
-  // final bc = Get.put(BatchController(), permanent: true);
-  // final dc = Get.put(DepartmentController(),permanent: true);
-  // final fc= Get.put(FacultyController(),permanent: true);
-  // final rc= Get.put(RoomController(),permanent: true);
-  final avm = Get.find<AuthController>();
+  final AuthController avm = Get.find<AuthController>();
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +28,6 @@ class _SplashViewState extends State<SplashView> {
     });
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

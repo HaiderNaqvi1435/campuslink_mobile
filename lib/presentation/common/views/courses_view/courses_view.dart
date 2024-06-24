@@ -21,13 +21,14 @@ class CoursesView extends StatefulWidget {
 }
 
 class _CoursesViewState extends State<CoursesView> {
+
   final tvm = Get.find<TimeTableViewModel>();
   final bvm = Get.find<BatchController>();
   final fvm = Get.find<FacultyController>();
   final cvm = Get.find<CourseViewModel>();
   final avm = Get.put(AttendanceViewModel());
   final savm = Get.put(StudentAttendanceViewModel());
-  final  ac = Get.find<AuthController>();
+  final ac = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +99,12 @@ class _CoursesViewState extends State<CoursesView> {
 
                               Get.toNamed(RouteName.teacherAttendanceView);
                             } else {
-                                savm.input.courseId.value =
+                              savm.input.courseId.value =
                                   tvm.userCourses[index].courseId!;
                               savm.input.batchId.value =
                                   tvm.userCourses[index].batchId!;
-                                  savm.input.studentId.value=ac.studentData.value.userId!;
+                              savm.input.studentId.value =
+                                  ac.studentData.value.userId!;
                               // Navigate to attendance viewing page
                               Get.toNamed(RouteName.studentAttendanceView);
                             }

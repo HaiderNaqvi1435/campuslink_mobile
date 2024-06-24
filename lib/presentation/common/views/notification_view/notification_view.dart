@@ -45,27 +45,14 @@ class _NotificationViewState extends State<NotificationView> {
                           color: AppColor.primaryColor,
                         ),
                       ),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            nvm.filteredNotifications[index].title ?? "",
-                            style: const TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            DateFormatter.getFormattedDateTime(
-                                nvm.filteredNotifications[index].dateTime!),
-                            style: const TextStyle(
-                                fontSize: 10,
-                                color: AppColor.labelColor,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      title: Text(
+                        nvm.filteredNotifications[index].title ?? "",
+                        style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                        maxLines: 2,
-                        nvm.filteredNotifications[index].body ?? "",
+                        DateFormatter.getFormattedDateTime(
+                            nvm.filteredNotifications[index].dateTime!),
                         style: const TextStyle(
                             fontSize: 12, color: AppColor.labelColor),
                       ),

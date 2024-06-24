@@ -1,15 +1,12 @@
-import 'package:campuslink_mobile/presentation/common/view_models/controller/auth_controller/auth_controller.dart';
 import 'package:campuslink_mobile/presentation/common/view_models/dashboard_view_model/dashboard_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../res/assets/icon_assets.dart';
+import '../../../../res/colors/app_color.dart';
 import '../../../../res/components/dashboard_button/dashboard_button.dart';
 import '../../../../res/routes/routes_name.dart';
 import '../../../../theme/app_theme_wiget/app_theme_wiget.dart';
-import '../../view_models/controller/faculty_controller/faculty_controller.dart';
-import '../../view_models/controller/room_controller/room_controller.dart';
-import '../../view_models/course_view_model/course_view_model.dart';
 import '../../view_models/timetable_view_model/timetable_view_model.dart';
 
 class DashboardView extends StatefulWidget {
@@ -21,15 +18,35 @@ class DashboardView extends StatefulWidget {
 
 class _DashboardViewState extends State<DashboardView> {
   final dvm = Get.put(DashboardViewModel());
-  final tvm = Get.put(TimeTableViewModel());
-  final rc = Get.put(RoomController());
-  final fc = Get.put(FacultyController());
-  final cvm = Get.put(CourseViewModel());
-  final avc = Get.find<AuthController>();
+
+  @override
+  void initState() {
+    super.initState();
+   Get.put(TimeTableViewModel());
+
+  //   Get.put(BatchController());
+  //   Get.put(DepartmentController());
+  //   Get.put(FacultyController());
+  //   Get.put(RoomController());
+  //   Get.put(CourseViewModel());
+  //   super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return AppThemeWidget(
-     
+      action: Container(
+        height: 30,
+        width: 30,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: AppColor.whiteColor,
+        ),
+        child: const Icon(
+          Icons.person,
+          color: AppColor.secondaryColor,
+        ),
+      ),
+      actionOnTap: () => Get.toNamed(RouteName.profileView),
       automaticallyImplyLeading: false,
       title: "Dashboard",
       child: Column(
